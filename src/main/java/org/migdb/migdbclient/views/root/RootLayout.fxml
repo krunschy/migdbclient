@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" styleClass="background" stylesheets="@../../resources/css/custom.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.migdb.migdbclient.views.root.RootLayoutController">
+         <top>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="87.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+               <children>
+            <MenuBar prefHeight="31.0" prefWidth="1200.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem fx:id="menubarCloseButtuon" mnemonicParsing="false" onAction="#closePlatform" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Database">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                      <MenuItem mnemonicParsing="false">
+                           <graphic>
+                              <Hyperlink fx:id="menubarManualHyperlink" text="About MigDB" />
+                           </graphic></MenuItem>
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+                  <AnchorPane layoutY="29.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+                     <children>
+                        <HBox layoutX="1.0" layoutY="1.0" prefHeight="56.0" prefWidth="73.0">
+                           <children>
+                              <Label fx:id="connectionManagerLabel" prefHeight="55.0" prefWidth="83.0" styleClass="label_connectionsload_button" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="74.0" layoutY="1.0" prefHeight="56.0" prefWidth="73.0">
+                           <children>
+                              <Label fx:id="modificationEvaluatorLabel" prefHeight="55.0" prefWidth="83.0" styleClass="label_migration_button" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="147.0" layoutY="1.0" prefHeight="56.0" prefWidth="73.0">
+                           <children>
+                              <Label fx:id="queryConverterLabel" prefHeight="55.0" prefWidth="83.0" styleClass="label_convert_button" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="220.0" layoutY="1.0" prefHeight="56.0" prefWidth="73.0">
+                           <children>
+                              <Label fx:id="queryGeneratorLabel" prefHeight="55.0" prefWidth="83.0" styleClass="label_generate_button" />
+                           </children>
+                        </HBox>
+                        <HBox layoutX="293.0" layoutY="1.0" prefHeight="56.0" prefWidth="73.0">
+                           <children>
+                              <Label fx:id="datamanagerLabel" prefHeight="55.0" prefWidth="83.0" styleClass="label_datamanager_button" />
+                           </children>
+                        </HBox>
+                     </children></AnchorPane>
+            <Separator layoutY="85.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0" />
+            <Separator layoutX="4.0" layoutY="23.0" prefHeight="8.0" prefWidth="1190.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="23.0" />
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="613.0" prefWidth="226.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="sideBarAnchorpane" layoutX="4.0" layoutY="4.0" prefHeight="613.0" prefWidth="224.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="No connections available ">
+                     <VBox.margin>
+                        <Insets left="45.0" top="300.0" />
+                     </VBox.margin></Label>
+               </children>
+            </VBox>
+            <Separator layoutX="223.0" layoutY="5.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="5.0" />
+         </children></AnchorPane>
+         </left>
+         <center>
+            <AnchorPane maxHeight="614.0">
+         <children>
+            <AnchorPane fx:id="rootContainerAncpane" prefHeight="614.0" prefWidth="974.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children></AnchorPane>
+         </center></BorderPane>

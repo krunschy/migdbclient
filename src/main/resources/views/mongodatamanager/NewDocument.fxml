@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="589.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.migdb.migdbclient.views.mongodatamanager.NewDocument">
+   <children>
+      <Separator layoutX="589.0" layoutY="22.0" orientation="VERTICAL" prefHeight="560.0" prefWidth="0.0" />
+      <Button fx:id="addKeyValue" layoutX="621.0" layoutY="60.0" mnemonicParsing="false" onAction="#addKeyValue" text="Add Key Value" />
+      <Button fx:id="addArray" layoutX="621.0" layoutY="103.0" mnemonicParsing="false" onAction="#addArray" text="Add Array" />
+      <Button fx:id="addObject" layoutX="621.0" layoutY="143.0" mnemonicParsing="false" onAction="#addEmbeddedObject" text="Add Object" />
+      <VBox fx:id="container" layoutX="84.0" layoutY="85.0" prefHeight="420.0" prefWidth="569.0" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0" />
+      <Label layoutX="58.0" layoutY="34.0" stylesheets="@/css/custom.css" text="Add New Dodument" textOverrun="CLIP">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="621.0" layoutY="517.0" mnemonicParsing="false" onAction="#getJson" styleClass="dark-blue" stylesheets="@/css/custom.css" text="Save" />
+      <Button fx:id="backButton" layoutX="70.0" layoutY="535.0" mnemonicParsing="false" onAction="#showCollectionManger" styleClass="dark-blue" stylesheets="@/css/custom.css" text="Back" />
+   </children>
+</AnchorPane>

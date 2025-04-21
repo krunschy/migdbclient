@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="197.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.migdb.migdbclient.views.filechooser.FileChooserDBPathController">
+<center>
+<AnchorPane BorderPane.alignment="CENTER">
+   <children>
+      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a Mongo Database Path" />
+      <Text layoutX="14.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a database path to use this session" />
+      <Separator layoutX="14.0" layoutY="73.0" prefHeight="0.0" prefWidth="570.0" />
+      <TextField fx:id="browseDbPathTextField" layoutX="14.0" layoutY="99.0" prefHeight="25.0" prefWidth="478.0" />
+      <Button fx:id="browseDbPathButton" layoutX="503.0" layoutY="99.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Browse.." />
+      <CheckBox fx:id="browseDbPathRememberCheckbox" layoutX="14.0" layoutY="146.0" mnemonicParsing="false" text="Use this as the default and do not ask again" />
+            <Button fx:id="browseDbPathOkButton" layoutX="437.0" layoutY="151.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Ok" />
+            <Button fx:id="browseDbPathCancelButton" layoutX="507.0" layoutY="151.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Cancel" />
+   </children>
+</AnchorPane>
+</center>
+</BorderPane>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="614.0" prefWidth="973.0" stylesheets="@../../resources/css/custom.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.migdb.migdbclient.views.dbmigrate.DbMigratorController">
+   <children>
+      <ComboBox fx:id="sqlDatabaseListComboBox" layoutX="304.0" layoutY="205.0" prefHeight="54.0" prefWidth="365.0" promptText="Select database" styleClass="db-combobox" />
+      <Label layoutX="142.0" layoutY="109.0" prefHeight="43.0" prefWidth="689.0" text="SELECT DATABASE WHICH NEEDS TO BE MIGRATED">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="migrateButton" layoutX="458.0" layoutY="307.0" mnemonicParsing="false" text="Migrate" />
+   </children>
+</AnchorPane>

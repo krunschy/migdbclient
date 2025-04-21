@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="rootLayoutAnchorpane" styleClass="background" stylesheets="@../../resources/css/custom.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.migdb.migdbclient.views.connectionmanager.ConnectionManagerController">
+   <children>
+      <AnchorPane prefHeight="109.0" prefWidth="974.0" style="-fx-background-color: #555555;" AnchorPane.bottomAnchor="505.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox layoutY="16.5" prefHeight="75.0" prefWidth="176.0">
+               <children>
+                  <Label prefHeight="75.0" prefWidth="198.0" styleClass="label_Connections" text="Connections" />
+               </children>
+            </HBox>
+            <HBox layoutX="176.0" layoutY="16.5" prefHeight="75.0" prefWidth="85.0">
+               <children>
+                  <Label fx:id="addConnectionLabel" prefHeight="76.0" prefWidth="90.0" styleClass="label_AddConnection" />
+               </children>
+            </HBox>
+            <HBox layoutX="241.0" layoutY="16.5" prefHeight="76.0" prefWidth="90.0" styleClass="label_settingConnection" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="connectionAnchorpane" layoutY="109.0" prefHeight="505.0" prefWidth="973.0" styleClass="background" />
+   </children>
+</AnchorPane>

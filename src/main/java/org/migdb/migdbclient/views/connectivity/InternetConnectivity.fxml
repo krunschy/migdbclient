@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane layoutY="200.0" prefHeight="150.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.migdb.migdbclient.main.MainApp">
+   <children>
+      <Text fill="#403d3d" layoutX="468.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refresh failed " textAlignment="CENTER" wrappingWidth="264.12890625">
+         <font>
+            <Font name="Yu Gothic UI Semilight" size="37.0" />
+         </font>
+      </Text>
+      <Text layoutX="315.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Could not connect to the remote server. The server or your internet connectivity down" wrappingWidth="570.13671875">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="internetConnectivityOkButton" layoutX="584.0" layoutY="104.0" mnemonicParsing="false" onAction="#internetConnectivityOkButtonClickEvent" text="Ok" />
+   </children>
+</AnchorPane>

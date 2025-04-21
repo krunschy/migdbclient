@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="973.0" style="-fx-background-color: #FFFFFF;" stylesheets="@/css/custom.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.migdb.migdbclient.views.queryGenerator.QueryGenerator">
+	<children>
+		<SplitPane dividerPositions="0.7679738562091504" orientation="VERTICAL" prefHeight="622.0" prefWidth="980.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<items>
+				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+					<children>
+						<TabPane fx:id="queryGeneratorTabPane" layoutX="14.0" layoutY="26.0" prefHeight="467.0" prefWidth="971.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+							<tabs>
+								<Tab text="Query">
+									<content>
+										<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+											<children>
+												<Label layoutX="101.0" layoutY="27.0" prefHeight="20.0" prefWidth="98.0" text="Database Name" />
+												<ComboBox fx:id="queryDatabaseListComboBox" layoutX="219.0" layoutY="23.0" prefHeight="25.0" prefWidth="214.0" />
+												<Label layoutX="512.0" layoutY="27.0" text="Collections" />
+												<ComboBox fx:id="queryCollectionListComboBox" layoutX="597.0" layoutY="25.0" prefHeight="25.0" prefWidth="214.0" />
+												<ComboBox fx:id="queryFieldListComboBox" layoutX="32.0" layoutY="63.0" prefHeight="25.0" prefWidth="249.0" promptText="Document's Fields" />
+												<ComboBox fx:id="queryOperatorsComboBox" layoutX="304.0" layoutY="63.0" prefHeight="25.0" prefWidth="241.0" promptText="Operators" />
+												<TextField fx:id="queryValuesTextField" layoutX="562.0" layoutY="63.0" prefHeight="25.0" prefWidth="218.0" promptText="Value" />
+												<Button fx:id="addQueryParamButton" layoutX="801.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Add" />
+												<TableView fx:id="queryParametersTableView" layoutX="32.0" layoutY="107.0" prefHeight="200.0" prefWidth="911.0">
+													<columns>
+														<TableColumn fx:id="fieldTableColumn" prefWidth="258.00001525878906" text="Fields" />
+														<TableColumn fx:id="operatorsTableColumn" prefWidth="262.0" text="Operators" />
+														<TableColumn fx:id="valuesTableColumn" prefWidth="254.0" text="Values" />
+                                          <TableColumn fx:id="removeTableColumn" prefWidth="136.0" />
+														<!-- <TableColumn fx:id="conditionTableColumn" prefWidth="181.0" 
+															text="Condition" /> -->
+													</columns>
+												</TableView>
+												<Label layoutX="34.0" layoutY="318.0" text="Limit" />
+												<TextField fx:id="queryLimitTextField" layoutX="81.0" layoutY="316.0" prefHeight="25.0" prefWidth="226.0" />
+												<Label layoutX="321.0" layoutY="320.0" text="Skip" />
+												<TextField fx:id="querySkipTextField" layoutX="372.0" layoutY="318.0" prefHeight="25.0" prefWidth="226.0" />
+												<Label layoutX="619.0" layoutY="321.0" text="Sort" />
+												<ComboBox fx:id="querySortColumnComboBox" layoutX="669.0" layoutY="319.0" prefWidth="150.0" promptText="Select Field" />
+												<ComboBox fx:id="querySortOrderComboBox" layoutX="822.0" layoutY="319.0" prefHeight="25.0" prefWidth="121.0" />
+												<Button fx:id="queryBuildButton" layoutX="390.0" layoutY="367.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="190.0" text="Generate Command" />
+											</children>
+										</AnchorPane>
+									</content>
+								</Tab>
+								<Tab text="Aggregation">
+									<content>
+										<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="28.0" layoutY="27.0" text="Database Name" />
+                                    <ComboBox fx:id="aggregationDatabaseComboBox" layoutX="117.0" layoutY="23.0" prefHeight="25.0" prefWidth="214.0" />
+                                    <Label layoutX="354.0" layoutY="27.0" text="Collections" />
+                                    <ComboBox fx:id="aggregationColectionComboBox" layoutX="420.0" layoutY="25.0" prefWidth="214.0" />
+                                    <RadioButton fx:id="aggregationCountRadioButton" layoutX="653.0" layoutY="29.0" mnemonicParsing="false" text="Count" />
+                                    <Separator layoutX="716.0" layoutY="19.0" orientation="VERTICAL" prefHeight="39.0" prefWidth="0.0" />
+                                    <RadioButton fx:id="aggregationSumRadioButton" layoutX="731.0" layoutY="30.0" mnemonicParsing="false" text="Sum" />
+                                    <ComboBox fx:id="aggregationFieldsComboBox" layoutX="32.0" layoutY="63.0" prefHeight="25.0" prefWidth="249.0" promptText="Document's Fields" />
+                                    <ComboBox fx:id="aggregationOperatorsComboBox" layoutX="304.0" layoutY="63.0" prefHeight="25.0" prefWidth="241.0" promptText="Operators" />
+                                    <TextField fx:id="aggregationValueTextField" layoutX="562.0" layoutY="63.0" prefHeight="25.0" prefWidth="218.0" promptText="Value" />
+                                    <Button fx:id="aggregationAddButton" layoutX="801.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" styleClass="button_addparameters_button" text="Add" />
+                                    <TableView fx:id="aggregationParametersTableView" layoutX="32.0" layoutY="107.0" prefHeight="200.0" prefWidth="911.0">
+                                       <columns>
+                                          <TableColumn fx:id="aggregationFieldTableColumn" prefWidth="258.00001525878906" text="Fields" />
+                                          <TableColumn fx:id="aggregationOperatorsTableColumn" prefWidth="262.0" text="Operators" />
+                                          <TableColumn fx:id="aggregationValuesTableColumn" prefWidth="254.0" text="Values" />
+                                          <TableColumn fx:id="aggregationRemoveTableColumn" prefWidth="136.0" />
+                                       </columns>
+                                    </TableView>
+                                    <Label layoutX="34.0" layoutY="318.0" text="Group by" />
+                                    <ComboBox fx:id="aggregationGroupbyComboBox" layoutX="97.0" layoutY="315.0" prefHeight="25.0" prefWidth="184.0" />
+                                    <Label layoutX="667.0" layoutY="321.0" text="Sort" />
+                                    <ComboBox fx:id="aggregationSortColumnComboBox" layoutX="693.0" layoutY="319.0" prefHeight="25.0" prefWidth="126.0" promptText="Select Field" />
+                                    <ComboBox fx:id="aggregationSortOrderComboBox" layoutX="822.0" layoutY="319.0" prefHeight="25.0" prefWidth="121.0" />
+                                    <Button fx:id="aggregationShowQueryButton" layoutX="390.0" layoutY="367.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="190.0" styleClass="button_showquery_button" text="Generate Command" />
+                                    <ComboBox fx:id="aggregationSumFieldComboBox" layoutX="780.0" layoutY="26.0" prefHeight="25.0" prefWidth="163.0" />
+                                    <Separator layoutX="307.0" layoutY="314.0" orientation="VERTICAL" prefHeight="29.0" prefWidth="5.0" />
+                                    <Separator layoutX="650.0" layoutY="315.0" orientation="VERTICAL" prefHeight="29.0" prefWidth="5.0" />
+                                    <GridPane fx:id="aggregationHavingGrid" layoutX="313.0" layoutY="315.0" prefHeight="30.0" prefWidth="331.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="79.0" minWidth="10.0" prefWidth="44.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="121.0" minWidth="10.0" prefWidth="49.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="138.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0" prefWidth="105.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Having" />
+                                          <Label fx:id="aggregationHavingTypeLabel" prefHeight="17.0" prefWidth="41.0" GridPane.columnIndex="1" />
+                                          <ComboBox fx:id="aggregationHavingOperatorComboBox" prefHeight="25.0" prefWidth="132.0" promptText="Operators" GridPane.columnIndex="2" />
+                                          <TextField fx:id="aggregationHavingTextField" prefHeight="25.0" prefWidth="82.0" promptText="Value" GridPane.columnIndex="3" />
+                                       </children>
+                                    </GridPane>
+                                 </children></AnchorPane>
+									</content>
+								</Tab>
+								<Tab text="Text Search">
+									<content>
+										<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="67.0" layoutY="42.0" text="Databse name" />
+                                    <ComboBox fx:id="textSearchDatabaseComboBox" layoutX="154.0" layoutY="38.0" prefWidth="200.0" />
+                                    <Label layoutX="400.0" layoutY="42.0" text="Collection" />
+                                    <ComboBox fx:id="textSearchCollectionComboBox" layoutX="462.0" layoutY="38.0" prefWidth="200.0" />
+                                    <Label layoutX="701.0" layoutY="42.0" text="Field" />
+                                    <ComboBox fx:id="textSearchFieldComboBox" layoutX="735.0" layoutY="38.0" prefHeight="25.0" prefWidth="200.0" />
+                                    <Label layoutX="55.0" layoutY="115.0" text="Mongo version is below 2.6" />
+                                    <CheckBox fx:id="textSearchOldVersionCheckBox" layoutX="388.0" layoutY="115.0" mnemonicParsing="false" />
+                                    <Label layoutX="55.0" layoutY="158.0" text="Create text index on" />
+                                    <Label fx:id="textSearchTextIndexLabel" layoutX="510.0" layoutY="158.0" text="Label" />
+                                    <Label layoutX="55.0" layoutY="198.0" text="Text search keyword" />
+                                    <TextField fx:id="textSearchKeywordTextField" layoutX="486.0" layoutY="194.0" />
+                                    <Button fx:id="textSearchCreateButton" layoutX="67.0" layoutY="287.0" mnemonicParsing="false" text="Generate Text Index" />
+                                    <Button fx:id="textSearchViewButton" layoutX="284.0" layoutY="287.0" mnemonicParsing="false" text="View Text Indexes" />
+                                    <Button fx:id="textSearchDropButton" layoutX="510.0" layoutY="287.0" mnemonicParsing="false" text="Delete Text Indexes" />
+                                    <Label layoutX="55.0" layoutY="228.0" text="* Comma seperate for multiple keywords" />
+                                 </children></AnchorPane>
+									</content>
+								</Tab>
+							</tabs>
+						</TabPane>
+					</children>
+				</AnchorPane>
+				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+					<children>
+						<Label prefHeight="29.0" prefWidth="471.0" text="Output" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+						<TextArea fx:id="outputQuery" layoutY="29.0" prefHeight="152.0" prefWidth="478.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0" />
+					</children>
+				</AnchorPane>
+			</items>
+		</SplitPane>
+	</children>
+</AnchorPane>

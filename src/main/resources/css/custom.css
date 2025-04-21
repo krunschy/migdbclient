@@ -1,0 +1,285 @@
+.background {
+    -fx-background-color: #FFFFFF;
+}
+
+/* *************** DB Migrator Page style *************** */
+.db-combobox {
+	-fx-background-radius: 0.0 0.0 0.0 0.0;
+	-fx-border-color: #ffffff;
+}
+
+.db-combobox .list-view .list-cell:hover {
+	-fx-text-fill: #ffffff;
+	-fx-background-color: #237f4e;
+}
+
+.db-combobox .cell:selected {
+	-fx-text-fill: #ffffff;
+	-fx-background-color: #237f4e;
+}
+/* ***************************************************** */
+
+/* *************** Progress bar style *************** */
+.progress-bar > .bar {
+    -fx-background-insets: 1.0 1.0 2.0 1.0;
+    -fx-padding: 0.2em;
+    -fx-accent: #336699;
+}
+/* *************************************************** */
+
+/* *************** Navigation bar icon *************** */
+.label_connectionsload_button {
+	-fx-background-image:url(/images/DBConn.png);
+}
+
+.label_connectionsload_button:hover {
+	-fx-background-image:url(/images/DBConnhover.png);
+}
+
+.label_migration_button {
+	-fx-background-image:url(/images/Migrate.png);
+}
+
+.label_migration_button:hover {
+	-fx-background-image:url(/images/Migratehover.png);
+}
+
+.label_convert_button {
+	-fx-background-image:url(/images/Convert.png);
+}
+
+.label_convert_button:hover {
+	-fx-background-image:url(/images/Converthover.png);
+}
+
+.label_generate_button {
+	-fx-background-image:url(/images/Generator.png);
+}
+
+.label_generate_button:hover {
+	-fx-background-image:url(/images/Generatorhover.png);
+}
+
+.label_datamanager_button {
+	-fx-background-image:url(/images/Manager.png);
+}
+
+.label_datamanager_button:hover {
+	-fx-background-image:url(/images/Managerhover.png);
+}
+/* *************************************************** */
+
+/* *************** Text Field style ********************* */
+.text-field {
+  -fx-background-radius: 0.0 0.0 0.0 0.0;
+}
+
+.text-field:focused {
+    -fx-border-color: #237f4e;
+}
+/* ******************************************************** */
+
+/* *************** Connection add button style *************** */
+.label_AddConnection {
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image:url(/images/connection_add.png);
+}
+
+.label_AddConnection:hover {
+	-fx-background-image:url(/images/connection_add_hover.png);
+}
+/* *********************************************************** */
+
+/* *************** Setting connection button style *************** */
+.label_settingConnection {
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image:url(/images/connection_setting.png);
+}
+
+.label_settingConnection:hover {
+	-fx-background-image:url(/images/connection_setting_hover.png);
+}
+/* *************************************************************** */
+
+/* ****************** Tab pane style ***************** */
+.tab-pane
+{
+    -fx-tab-min-width:90.0px;
+    -fx-tab-min-height:30.0px;
+    -fx-background-color: #FFFFFF;
+}
+
+.tab{
+    -fx-background-insets: 0.0 1.0 0.0 1.0,0.0,0.0;
+}
+.tab-pane .tab
+{
+    -fx-background-color: 
+        #090a0c,
+        linear-gradient(#237f4e 0.0%, #1f7246 20.0%, #388b5f 100.0%),
+        linear-gradient(#237f4e, #388b5f),
+        radial-gradient(center 50.0% 0.0%, radius 100.0%, rgba(17.0,63.0,39.0), rgba(28.0,101.0,62.0));
+
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: #65A583;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12.0px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow( one-pass-box , rgba(0.0,0.0,0.0,0.9) , 1.0, 0.0 , 0.0 , 1.0 );
+}
+/* *************************************************** */
+
+/* ************** Tree view style ************** */
+.sidebar > .tree-cell:selected {
+    -fx-font-weight: bold ;
+}
+.sidebar > .tree-view, .sidebar > .tree-cell {
+    -fx-background-color: #E8E8E8;
+    -fx-text-fill: #000000;
+    -fx-border-color: #ffffff;
+}
+.sidebar > .tree-cell:expanded, .sidebar > .tree-cell:sub-tree-item {
+    -fx-background-color: #D0D0D0;
+}
+.sidebar > .tree-cell:selected {
+    -fx-font-weight: bold;
+    -fx-border-color: #ffffff;
+}
+.sidebar > .tree-cell {
+    -fx-padding: 0.75em 0em 0.75em 0em ;
+}
+.sidebar > .tree-cell:sub-tree-item {
+    -fx-padding: 0.25em ;
+}
+/* ********************************************* */
+
+/**************************************************
+ *  				Button Style
+ **************************************************/
+ .button {
+    -fx-padding: 5 22 5 22;   
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #237f4e;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #ffffff;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: #65a583;
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: #91bfa6;
+  -fx-text-fill: #1d1d1d;
+}
+
+.button:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
+ 
+
+/* ************** Menu style ************** */
+.menu-bar{
+	-fx-background-color: #FFFFFF;
+	-fx-selection-bar: derive(-fx-background,-7%);
+}
+
+.menu {
+	-fx-background-color: #FFFFFF;
+	-fx-border-width: 1 1 0 1; -fx-border-color: #237f4e;
+	-fx-focus-color:#237f4e;
+}
+
+.menu:hover, .menu:filled {
+	-fx-background-color: #237f4e;
+}
+
+.menu:hover .label {
+	-fx-text-fill: #ffffff;
+}
+
+.menu-item:hover {
+     -fx-background-color: #237f4e;
+}
+
+.menu .menu-item .label {
+	-fx-text-fill: #000000;
+}
+
+.menu .menu-item:hover > .label {
+	-fx-text-fill: #ffffff;
+}
+/* **************************************** */
+
+/* ********** Main Window Page style *********** */
+.mysql_connectivity {
+	-fx-background-image:url(/images/MySQL_Connectivity.jpg);
+}
+
+.mongo_connectivity {
+	-fx-background-image:url(/images/Mongo_Connectivity.jpg);
+}
+
+.internet_connectivity {
+	-fx-background-image:url(/images/Internet_Connectivity.jpg);
+}
+
+.NNetwork_connectivity {
+	-fx-background-image:url(/images/NNetwork_Connectivity.jpg);
+}
+/* ********************************************* */
+
+.label_Connections {
+	-fx-font-size: 20.0pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-label-padding : 0.0 0.0 0.0 20.0px;
+    -fx-text-fill: #ffffff;
+}
+
+.label_createConnections {
+	-fx-font-size: 20.0pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-label-padding : 0.0 0.0 0.0 20.0px;
+    -fx-text-fill: #000000;
+}
+
+ .label_next_button {
+ 	-fx-background-image:url(/images/Nextbutton.png);
+ }

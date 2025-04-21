@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="rootAncPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="973.0" stylesheets="/css/custom.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.migdb.migdbclient.views.mongodatamanager.MongoDataManager">
+   <children>
+      <Label layoutX="22.0" layoutY="81.0" prefHeight="17.0" prefWidth="252.0" text="Collections" />
+      <ListView fx:id="collectionList" layoutX="24.0" layoutY="107.0" prefHeight="309.0" prefWidth="490.0">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#showCollectionManger" text="View" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteCollection" text="Delete" />
+              </items>
+            </ContextMenu>
+         </contextMenu></ListView>
+      <Label layoutX="24.0" layoutY="43.0" text="Schema Name : " />
+      <Label fx:id="databaseNameLabel" layoutX="138.0" layoutY="43.0" text="Label" />
+      <Button fx:id="btnAddCollection" layoutX="552.0" layoutY="107.0" mnemonicParsing="false" onAction="#showNewCollection" styleClass="dark-blue" text="Create Collection" />
+   </children>
+</AnchorPane>
