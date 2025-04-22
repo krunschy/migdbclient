@@ -118,7 +118,9 @@ public class ServiceAccessor {
 
 		String input = message.getMessageBody().toJSONString();
 
+
 		client.addFilter(new HTTPBasicAuthFilter("fhgi8598ugh985yhob580uojg0t", "dfjgn984u608jb950o9bipj0945yjpbjmgi"));
+		System.out.println("LEARN DEBUG: Sending JSON to server:\n" + input);
 		ClientResponse response = webResource.type("application/json")
 				.accept("application/json")
 				.post(ClientResponse.class, input);

@@ -14,23 +14,19 @@ public enum MongoConnManager {
 
 	private MongoClient client = null;
 
-	// Connect method with MongoDB 4.x driver
 	public MongoClient connect(String host, int port) throws Exception {
 		if (client == null) {
-			// Create MongoDB client using MongoClientSettings
 			MongoClientSettings settings = MongoClientSettings.builder()
 					.applyToClusterSettings(builder ->
 							builder.hosts(Collections.singletonList(new ServerAddress(host, port))))
 					.build();
-
-			// Create a MongoClient with the specified settings
 			client = MongoClients.create(settings);
 		}
 
 		return client;
 	}
 
-	// Connect to a specific database
+
 	public MongoDatabase connectToDatabase(String database) throws Exception {
 		if (client == null) {
 			throw new IllegalStateException("MongoClient is not connected.");

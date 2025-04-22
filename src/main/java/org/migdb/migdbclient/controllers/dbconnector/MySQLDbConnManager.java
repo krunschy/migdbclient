@@ -18,13 +18,12 @@ public class MySQLDbConnManager {
 	public Connection getConnection(String host, int port, String database, String username, String password){
 		Connection dbConn = null;
 		try {
-			// Add SSL-related params to disable SSL and avoid warnings
 			String connectionURL = "jdbc:mysql://" + host + ":" + port + "/" + database +
 					"?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 			Class.forName("com.mysql.jdbc.Driver");
 			dbConn = DriverManager.getConnection(connectionURL, username, password);
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace(); // This is key
+			e.printStackTrace();
 			dbConn = null;
 		}
 		return dbConn;

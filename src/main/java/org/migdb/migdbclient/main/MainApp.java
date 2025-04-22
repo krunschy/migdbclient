@@ -77,7 +77,7 @@ public class MainApp extends Application {
 		splashLayout.setEffect(new DropShadow());
 		ConnectivityIsShowInstance.INSTANCE.setShow(false);
 
-		// Perform necessary configuration when app loading
+
 		Configurations config = new Configurations();
 		System.out.println("Creating app folder...");
 		config.createAppFolder();
@@ -96,7 +96,7 @@ public class MainApp extends Application {
 				ObservableList<String> availableJars = FXCollections.observableArrayList();
 
 				ClassLoader loader = ClassLoader.getSystemClassLoader();
-				System.out.println("ClassLoader: " + loader.getClass());  // Debug class loader type
+				System.out.println("ClassLoader: " + loader.getClass());
 				if (loader instanceof URLClassLoader) {
 					URL[] urls = ((URLClassLoader) loader).getURLs();
 					for (URL url : urls) {
@@ -134,20 +134,17 @@ public class MainApp extends Application {
 	public void showMainStage() {
 		try {
 			System.out.println("Starting main stage...");
-			// runner.start();
 
 			primaryStage = new Stage(StageStyle.DECORATED);
 			primaryStage.setTitle("MigDB");
 			primaryStage.getIcons().add(new Image(ImagePath.FAVICON.getPath()));
 
-			// Load the root layout from the fxml file
 			FXMLLoader loader = new FXMLLoader();
 			System.out.println("FXML path: " + FxmlPath.ROOTLAYOUT.getPath());
 			System.out.println("Resolved URL: " + MainApp.class.getResource(FxmlPath.ROOTLAYOUT.getPath()));
 			loader.setLocation(MainApp.class.getResource(FxmlPath.ROOTLAYOUT.getPath()));
 			rootLayout = loader.load();
 
-			// Show the scene containing root layout
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -155,7 +152,7 @@ public class MainApp extends Application {
 
 				@Override
 				public void handle(WindowEvent event) {
-					event.consume(); // This stops it's further handling of the event -> Prevent stage close
+					event.consume();
 					RootLayoutController rootCntrlr = new RootLayoutController();
 					rootCntrlr.closePlatform();
 					runner.stop();
@@ -185,7 +182,6 @@ public class MainApp extends Application {
 			}
 		});
 
-		// Adding setOnFailed to catch any background task errors during splash
 		task.setOnFailed(event -> {
 			System.err.println("Splash task failed:");
 			task.getException().printStackTrace();

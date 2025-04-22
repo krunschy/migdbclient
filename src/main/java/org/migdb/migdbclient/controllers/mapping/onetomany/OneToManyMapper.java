@@ -137,6 +137,7 @@ public class OneToManyMapper {
 					if(oneSideComplexity >= manySideComplexity) {
 						String mappingModel = (String)manySideResponse.get("mappingModel");
 						if(mappingModel.equals("EMBEDDING") && referencedArr.isEmpty() && (referencingArr.size() == 1)) {
+							System.out.println("1:N Neural Network Decision: EMBEDDING");
 							mappingType = "Embedding";
 
 							ChangeStructureObject.put("from", referencedTabName);
@@ -145,7 +146,9 @@ public class OneToManyMapper {
 							ChangeStructureObject.put("text", "");
 
 						} else {
+							System.out.println("1:N Neural Network Decision: REFERENCING");
 							mappingType = "Referencing";
+
 
 							ChangeStructureObject.put("from", referencingTabName);
 							ChangeStructureObject.put("to", referencedTabName);
@@ -154,6 +157,7 @@ public class OneToManyMapper {
 
 						}
 					} else {
+						System.out.println("1:N COMPLEXITY Decision: REFERENCING");
 						mappingType = "Referencing";
 
 						ChangeStructureObject.put("from", referencingTabName);

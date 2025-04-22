@@ -151,18 +151,29 @@ public class ManyToMany {
 		JSONObject referencingTable1Info = (JSONObject) referencingFrom.get(0);
 		JSONObject referencingTable2Info = (JSONObject) referencingFrom.get(1);
 		System.out.println("referencingFrom : " + referencingFrom);
+
 		JSONObject referencingTable1 = new JSONObject();
 		JSONObject referencingTable2 = new JSONObject();
+
 		for (int i = 0; i < sqlTables.size(); i++) {
 			JSONObject table = (JSONObject) sqlTables.get(i);
-			if (table.get("name").toString().equals(referencingTable1Info.get("referencedTab"))) {
-				referencingTable1 = (JSONObject) sqlTables.get(i);
-			} else if (table.get("name").toString().equals(referencingTable2Info.get("referencedTab"))) {
-				referencingTable2 = (JSONObject) sqlTables.get(i);
+			String tableName = table.get("name").toString();
+			System.out.println("Checking table: " + tableName);
+
+			if (tableName.equals(referencingTable1Info.get("referencedTab"))) {
+				referencingTable1 = table;
+				System.out.println("Matched referencingTable1: " + tableName);
+			} else if (tableName.equals(referencingTable2Info.get("referencedTab"))) {
+				referencingTable2 = table;
+				System.out.println("Matched referencingTable2: " + tableName);
 			}
 		}
+
+
 		JSONObject referencingTable1ColInfo = (JSONObject) referencingTable1.get("dataTypeCount");
 		JSONObject referencingTable2ColInfo = (JSONObject) referencingTable2.get("dataTypeCount");
+
+
 		ServiceAccessor accessor = new ServiceAccessor();
 		JSONObject table1Response = accessor.getMappingModel("ClientId", "requestId",
 				referencingTable1.get("colCount").toString(), referencingTable1ColInfo.get("NUMERIC_COUNT").toString(),
@@ -172,6 +183,11 @@ public class ManyToMany {
 				referencingTable2.get("colCount").toString(), referencingTable2ColInfo.get("NUMERIC_COUNT").toString(),
 				referencingTable2ColInfo.get("STRING_COUNT").toString(),
 				referencingTable2ColInfo.get("DATE_COUNT").toString());
+
+		// Debug: Mapping service responses
+		System.out.println("Mapping Model Response - Table 1: " + table1Response.toJSONString());
+		System.out.println("Mapping Model Response - Table 2: " + table2Response.toJSONString());
+
 		JSONObject summary = new JSONObject();
 		JSONObject ChangeStructureObject = new JSONObject();
 		ChangeStructureObject.put("text", "");
@@ -180,30 +196,70 @@ public class ManyToMany {
 				.parseDouble(table2Response.get("complexity").toString())) {
 			summary.put("parent", referencingTable1Info.get("referencedTab"));
 			summary.put("method", table1Response.get("mappingModel"));
-			// summary.put("method", "EMBEDDING");
 
 			ChangeStructureObject.put("from", referencingTable1Info.get("referencedTab"));
 			ChangeStructureObject.put("to", referencingTable2Info.get("referencedTab"));
+			//woher soll er das wissen?!
 			ChangeStructureObject.put("toText", table1Response.get("mappingModel"));
-
 		} else {
 			summary.put("parent", referencingTable2Info.get("referencedTab"));
 			summary.put("method", table2Response.get("mappingModel"));
-			// summary.put("method", "EMBEDDING");
 
 			ChangeStructureObject.put("from", referencingTable2Info.get("referencedTab"));
 			ChangeStructureObject.put("to", referencingTable1Info.get("referencedTab"));
 			ChangeStructureObject.put("toText", table2Response.get("mappingModel"));
-
 		}
+
+		//todo: probier das mapping model direkt zu setzen, weil das kanns ja unmöglich heir scho wissen
+		//andererseits; woher wiss ma jez genau, wie wir diese n:m lösen?! kann ja mit referencing oder embedding sein, beides möglich?
+		//die sache is, ich hab ka was es eig sein sollte.
+		//wichtig is dass das nn wirklich nur simple  metadaten (wieviele columns, welchers datatype) auswertet, also kanns halt echt nicht so kompliziert sein, weil eig sollts die data points per se considern
+
+
+        /*
+        if (table1Response.get("mappingModel").toString().equals("UNABLETOPREDICT") &&
+				table2Response.get("mappingModel").toString().equals("UNABLETOPREDICT")) {
+			System.out.println("WARNING: BOTH TABLES COULD NOT BE PREDICTED, FORCING EMBEDDED METHOD!");
+			// Embed the less complex table
+			if (Double.parseDouble(table1Response.get("complexity").toString()) > Double.parseDouble(table2Response.get("complexity").toString())) {
+				summary.put("parent", referencingTable1Info.get("referencedTab"));
+				summary.put("method", "EMBEDDING");
+
+				ChangeStructureObject.put("from", referencingTable1Info.get("referencedTab"));
+				ChangeStructureObject.put("to", referencingTable2Info.get("referencedTab"));
+				ChangeStructureObject.put("toText", "EMBEDDING");
+			} else {
+				summary.put("parent", referencingTable2Info.get("referencedTab"));
+				summary.put("method", "EMBEDDING");
+
+				ChangeStructureObject.put("from", referencingTable2Info.get("referencedTab"));
+				ChangeStructureObject.put("to", referencingTable1Info.get("referencedTab"));
+				ChangeStructureObject.put("toText", "EMBEDDING");
+			}
+		} else {
+			if (Double.parseDouble(table1Response.get("complexity").toString()) > Double.parseDouble(table2Response.get("complexity").toString())) {
+				summary.put("parent", referencingTable1Info.get("referencedTab"));
+				summary.put("method", table1Response.get("mappingModel"));
+
+				ChangeStructureObject.put("from", referencingTable1Info.get("referencedTab"));
+				ChangeStructureObject.put("to", referencingTable2Info.get("referencedTab"));
+				ChangeStructureObject.put("toText", table1Response.get("mappingModel"));
+			} else {
+				summary.put("parent", referencingTable2Info.get("referencedTab"));
+				summary.put("method", table2Response.get("mappingModel"));
+
+				ChangeStructureObject.put("from", referencingTable2Info.get("referencedTab"));
+				ChangeStructureObject.put("to", referencingTable1Info.get("referencedTab"));
+				ChangeStructureObject.put("toText", table2Response.get("mappingModel"));
+			}
+		}*/
+
 		ChangeStructure structure = ChangeStructure.getInstance();
 		structure.linkDataArray.add(ChangeStructureObject);
-		// changeStructure.add(ChangeStructureObject);
-		// JSONObject summary = new JSONObject();
-		// summary.put("method", "EMBEDDING");
-		// summary.put("parent", "employee");
+
 		return summary;
 	}
+
 
 	/**
 	 * use to embed the child table to parent table
