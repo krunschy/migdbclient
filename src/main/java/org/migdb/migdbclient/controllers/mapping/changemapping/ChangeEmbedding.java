@@ -33,61 +33,76 @@ public class ChangeEmbedding {
 		try {
 			this.child = child;
 			this.parent = parent;
-			System.out.println("Parent:" + parent + " Child:" + child);
-			JSONArray collectionArray = new JSONArray();
-			JSONArray returnReferencingObjects = new JSONArray();
-			JSONObject parentCollection = new JSONObject();
-			collectionArray = (JSONArray) collectionStructure.get("collections");
-			for (int i = 0; i < collectionArray.size(); i++) {
-				parentCollection = (JSONObject) collectionArray.get(i);
-				if (parentCollection.get("collectionName").toString().equalsIgnoreCase(parent)) {
-					JSONArray dataArray = (JSONArray) parentCollection.get("data");
+			System.out.println("Parent: " + parent + " | Child: " + child);
 
-					for (int j = 0; j < dataArray.size(); j++) {
-						JSONObject dataObject = (JSONObject) dataArray.get(j);
-						if (dataObject.containsKey(child)) {
+			JSONArray collections = (JSONArray) collectionStructure.get("collections");
+			JSONObject parentCollection = null;
 
-							if (dataObject.get(child) instanceof JSONArray) {
-								JSONArray tempArray = (JSONArray) dataObject.get(child);
-								ObjectId id = new ObjectId();
-								dataObject.remove(child);
-								dataObject.put(child, id.toString());
-								JSONObject rowValue = new JSONObject();
-								rowValue.put("_id", id.toString());
-								returnReferencingObjects.add(rowValue);
-
-							} else if (dataObject.get(child) instanceof JSONObject) {
-								JSONObject tempObject = (JSONObject) dataObject.get(child);
-								ObjectId id = new ObjectId();
-								dataObject.remove(child);
-								dataObject.put(child, id.toString());
-								tempObject.put("_id", id.toString());
-								returnReferencingObjects.add(tempObject);
-
-							}
-
-						}
-						dataArray.remove(j);
-						dataArray.add(dataObject);
-					}
-					parentCollection.remove("data");
-					parentCollection.put("data", dataArray);
-					collectionArray.remove(i);
-
+			for (Object obj : collections) {
+				JSONObject collection = (JSONObject) obj;
+				if (collection.get("collectionName").toString().equalsIgnoreCase(parent)) {
+					parentCollection = collection;
+					break;
 				}
-
 			}
 
-			collectionArray.add(parentCollection);
-			collectionArray.add(buildCollection(returnReferencingObjects));
+			if (parentCollection == null) {
+				System.out.println("Parent collection not found.");
+				return;
+			}
 
-			collectionStructure.remove("collections");
-			collectionStructure.put("collections", collectionArray);
+			JSONArray parentDataArray = (JSONArray) parentCollection.get("data");
+			JSONArray newChildCollectionData = new JSONArray();
+
+			for (int i = 0; i < parentDataArray.size(); i++) {
+				JSONObject parentRecord = (JSONObject) parentDataArray.get(i);
+
+				if (!parentRecord.containsKey(child)) continue;
+
+				Object embeddedValue = parentRecord.get(child);
+
+				if (embeddedValue instanceof JSONObject) {
+					JSONObject embeddedObject = (JSONObject) embeddedValue;
+					String newId = new ObjectId().toString();
+					embeddedObject.put("_id", newId);
+					parentRecord.put(child, newId);
+					newChildCollectionData.add(embeddedObject);
+
+				} else if (embeddedValue instanceof JSONArray) {
+					JSONArray embeddedArray = (JSONArray) embeddedValue;
+					JSONArray refIdArray = new JSONArray();
+
+					for (Object embeddedObj : embeddedArray) {
+						if (embeddedObj instanceof JSONObject) {
+							JSONObject embeddedChild = (JSONObject) embeddedObj;
+							String newId = new ObjectId().toString();
+							embeddedChild.put("_id", newId);
+							refIdArray.add(newId);
+							newChildCollectionData.add(embeddedChild);
+						}
+					}
+
+					parentRecord.put(child, refIdArray);
+				}
+			}
+			parentCollection.put("data", parentDataArray);
+			collections.removeIf(c -> ((JSONObject) c).get("collectionName").toString().equalsIgnoreCase(parent));
+			collections.add(parentCollection);
+			JSONObject newChildCollection = new JSONObject();
+			newChildCollection.put("collectionName", child);
+			newChildCollection.put("data", newChildCollectionData);
+			collections.add(newChildCollection);
+
+			collectionStructure.put("collections", collections);
+
 			writeChangedJson();
+
 		} catch (Exception ex) {
-			System.out.println("Recheck Embedding to referencing mapping change" + ex);
+			System.out.println("Error during embedding to referencing conversion: " + ex.getMessage());
+			ex.printStackTrace();
 		}
 	}
+
 
 	public JSONObject buildCollection(JSONArray collectionData) {
 		JSONObject newCollection = new JSONObject();

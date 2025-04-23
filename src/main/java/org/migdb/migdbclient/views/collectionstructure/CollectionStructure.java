@@ -64,9 +64,8 @@ public class CollectionStructure implements Initializable {
     				changeReferencing.change(relation.get("from").toString(), relation.get("to").toString());
     			}
     			else if(relation.get("originalvalue").toString().equals("EMBEDDING")&& relation.get("toText").toString().equals("REFERENCING")){
-    				//ChangeEmbedding changeEmbedding = new ChangeEmbedding();
-    				//changeEmbedding.changeEmbeddingToReferencing(relation.get("from")
-    				//.toString(), relation.get("to").toString());
+    				ChangeEmbedding changeEmbedding = new ChangeEmbedding();
+    				changeEmbedding.changeEmbeddingToReferencing(relation.get("from").toString(), relation.get("to").toString());
     			}
     			System.out.println(changestructure.get(i));
     		}
