@@ -48,30 +48,30 @@ public class ManyToMany {
 	/**
 	 * identify the many-to-many relationships in the dbStructure file
 	 */
-	public void identifyM2M() {
+	public void identifyM2M() { //diese methode findet tables, die genau 2 andere tables referencen mit , also potentiell einfach nur links sind
 
 		JSONArray sqlTables = (JSONArray) sqlJson.get("tables");
-		for (int i = 0; i < sqlTables.size(); i++) {
+		for (int i = 0; i < sqlTables.size(); i++) { //für alle tables also
 			int m2mCount = 0;
 			JSONObject sqlTable = (JSONObject) sqlTables.get(i);
 			if (sqlTable.containsKey("referencingFrom")) {
 				JSONArray referencingFrom = (JSONArray) sqlTable.get("referencingFrom");
-				if (referencingFrom.size() == 2) {
+				if (referencingFrom.size() == 2) { //wenn der table genau 2 sachen referenced
 
 					for (int j = 0; j < referencingFrom.size(); j++) {
 						JSONObject referenceInfo = (JSONObject) referencingFrom.get(j);
 						String string = referenceInfo.get("relationshipType").toString();
 						if(string != null) {
-							if (string.equals("ManyToMany")) {
+							if (string.equals("ManyToMany")) { //und bei beiden der relationshiptype many to many is
 								m2mCount++;
 							}
 						}
 					}
 				}
 			}
-			if (m2mCount == 2) {
+			if (m2mCount == 2) { //also wenn wir so nen connector table haben
 				mappedDataArray = new JSONArray();
-				setMapInstance(sqlTable);
+				setMapInstance(sqlTable); //setz ma mal den table als das was wir brauchen und...
 				if (mappingMethod.get("method").toString().equals("EMBEDDING")) {
 					embed();
 				} else if (mappingMethod.get("method").toString().equals("REFERENCING")) {
@@ -199,7 +199,6 @@ public class ManyToMany {
 
 			ChangeStructureObject.put("from", referencingTable1Info.get("referencedTab"));
 			ChangeStructureObject.put("to", referencingTable2Info.get("referencedTab"));
-			//woher soll er das wissen?!
 			ChangeStructureObject.put("toText", table1Response.get("mappingModel"));
 		} else {
 			summary.put("parent", referencingTable2Info.get("referencedTab"));
@@ -209,50 +208,6 @@ public class ManyToMany {
 			ChangeStructureObject.put("to", referencingTable1Info.get("referencedTab"));
 			ChangeStructureObject.put("toText", table2Response.get("mappingModel"));
 		}
-
-		//todo: probier das mapping model direkt zu setzen, weil das kanns ja unmöglich heir scho wissen
-		//andererseits; woher wiss ma jez genau, wie wir diese n:m lösen?! kann ja mit referencing oder embedding sein, beides möglich?
-		//die sache is, ich hab ka was es eig sein sollte.
-		//wichtig is dass das nn wirklich nur simple  metadaten (wieviele columns, welchers datatype) auswertet, also kanns halt echt nicht so kompliziert sein, weil eig sollts die data points per se considern
-
-
-        /*
-        if (table1Response.get("mappingModel").toString().equals("UNABLETOPREDICT") &&
-				table2Response.get("mappingModel").toString().equals("UNABLETOPREDICT")) {
-			System.out.println("WARNING: BOTH TABLES COULD NOT BE PREDICTED, FORCING EMBEDDED METHOD!");
-			// Embed the less complex table
-			if (Double.parseDouble(table1Response.get("complexity").toString()) > Double.parseDouble(table2Response.get("complexity").toString())) {
-				summary.put("parent", referencingTable1Info.get("referencedTab"));
-				summary.put("method", "EMBEDDING");
-
-				ChangeStructureObject.put("from", referencingTable1Info.get("referencedTab"));
-				ChangeStructureObject.put("to", referencingTable2Info.get("referencedTab"));
-				ChangeStructureObject.put("toText", "EMBEDDING");
-			} else {
-				summary.put("parent", referencingTable2Info.get("referencedTab"));
-				summary.put("method", "EMBEDDING");
-
-				ChangeStructureObject.put("from", referencingTable2Info.get("referencedTab"));
-				ChangeStructureObject.put("to", referencingTable1Info.get("referencedTab"));
-				ChangeStructureObject.put("toText", "EMBEDDING");
-			}
-		} else {
-			if (Double.parseDouble(table1Response.get("complexity").toString()) > Double.parseDouble(table2Response.get("complexity").toString())) {
-				summary.put("parent", referencingTable1Info.get("referencedTab"));
-				summary.put("method", table1Response.get("mappingModel"));
-
-				ChangeStructureObject.put("from", referencingTable1Info.get("referencedTab"));
-				ChangeStructureObject.put("to", referencingTable2Info.get("referencedTab"));
-				ChangeStructureObject.put("toText", table1Response.get("mappingModel"));
-			} else {
-				summary.put("parent", referencingTable2Info.get("referencedTab"));
-				summary.put("method", table2Response.get("mappingModel"));
-
-				ChangeStructureObject.put("from", referencingTable2Info.get("referencedTab"));
-				ChangeStructureObject.put("to", referencingTable1Info.get("referencedTab"));
-				ChangeStructureObject.put("toText", table2Response.get("mappingModel"));
-			}
-		}*/
 
 		ChangeStructure structure = ChangeStructure.getInstance();
 		structure.linkDataArray.add(ChangeStructureObject);
@@ -287,6 +242,7 @@ public class ManyToMany {
 			JSONArray referencingDataArray = new JSONArray();
 			for (Object object2 : mappingData) {
 				JSONObject mappingObject = (JSONObject) object2;
+				System.out.println("potentially missing Col: " + referencedCol);
 				String referencedValue = mappingObject.get(referencingCol).toString();
 				if (referencedValue.equals(table1Value)) {
 					JSONObject referencingObject = findTable2Value(mappingObject);
@@ -454,20 +410,40 @@ public class ManyToMany {
 		JSONObject table2 = ManyToManyResource.INSTANCE.getTable2();
 		JSONArray table2Data = (JSONArray) table2.get("data");
 		JSONObject table2MappingInfo = ManyToManyResource.INSTANCE.getTable2Info();
+
 		String referencingCol = table2MappingInfo.get("referencingCol").toString();
 		String referencedCol = table2MappingInfo.get("referencedCol").toString();
+
 		String referencedValue = mappingObject.get(referencingCol).toString();
+
 		for (Object object : table2Data) {
 			JSONObject table2DataObject = (JSONObject) object;
-			String table2Value = table2DataObject.get(referencedCol).toString();
-			if (referencedValue.equals(table2Value)) {
-				// JSONObject referencedObjectId = new JSONObject();
-				// referencedObjectId.put("_id", table2DataObject.get("_id"));
-				// return referencedObjectId;
-				return table2DataObject.get("_id").toString();
+			System.out.println("DEBUG: Attempting to access key '" + referencedCol + "' in: " + table2DataObject);
 
+			Object table2ValueRaw = table2DataObject.get(referencedCol);
+
+			if (table2ValueRaw == null && referencedCol.endsWith("_id")) {
+				// Try nested lookup
+				String nestedDocName = referencedCol.substring(0, referencedCol.length() - 3); // remove "_id"
+				JSONObject nested = (JSONObject) table2DataObject.get(nestedDocName);
+				if (nested != null) {
+					table2ValueRaw = nested.get(referencedCol);
+					System.out.println("DEBUG: Fallback to nested '" + nestedDocName + "' for key '" + referencedCol + "'");
+				} else {
+					System.out.println("DEBUG: Nested object '" + nestedDocName + "' not found.");
+				}
+			}
+			if (table2ValueRaw == null) {
+				System.out.println("DEBUG: Could not find value for '" + referencedCol + "' in object.");
+				continue; // skip this one
+			}
+
+			String table2Value = table2ValueRaw.toString();
+			if (referencedValue.equals(table2Value)) {
+				return table2DataObject.get("_id").toString();
 			}
 		}
+
 		return null;
 	}
 

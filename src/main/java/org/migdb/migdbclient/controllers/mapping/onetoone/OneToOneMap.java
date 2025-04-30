@@ -91,6 +91,7 @@ public class OneToOneMap {
 						while (iterateData.hasNext()) {
 							dataObj = iterateData.next();
 							String column = (String) dataObj.get(referencedCol);
+							//System.out.println("DEBUG - 'column': " + column);
 							JSONObject getReturn = getReferencedBy(referencingTab, referencingCol, column);
 							getReturn.remove(referencingCol);
 							if(!getReturn.isEmpty()){
